@@ -40,7 +40,7 @@ namespace Mips16bits
             foreach (Instruction ins in ınstructions)
             {
                 
-                this.item = new ListViewItem("0x000000"+ins.insMemory.ToString());
+                this.item = new ListViewItem("0x"+ins.insMemory.ToString("X").PadLeft(5,'0'));
                 this.item.SubItems.Add(ins.machCode);
                 this.item.SubItems.Add("0x"+Convert.ToInt32(ins.machCode, 2).ToString("X"));
                 this.item.SubItems.Add(ins.data);

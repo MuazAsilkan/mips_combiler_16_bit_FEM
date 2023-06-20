@@ -121,7 +121,7 @@ namespace Mips16bits.Mips
                 {
             
 
-                    if (item.data.Replace(":","")  == constants[0]) 
+                    if (item.data.Replace(":","").Trim()  == constants[0]) 
                     {
                         Console.WriteLine(item.insMemory);
                         machineCode.machineCode = machineCode.machineCode + Convert.ToString(item.insMemory, 2).PadLeft(11, '0');
