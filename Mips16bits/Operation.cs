@@ -46,14 +46,11 @@ namespace Mips16bits
             {
                 return ((int.Parse(num1)) - (int.Parse(num2))).ToString();
             }
-            else if (num2.Contains("-"))
-            {
-                return (Convert.ToInt32(num1, 16) + int.Parse(num2.TrimStart('-'))).ToString();
-            }
+           
             else
             {
 
-                return (Convert.ToInt32(num2, 16) - (Convert.ToInt32(num1, 16))).ToString();
+                return (Convert.ToInt32(num1, 16) - (Convert.ToInt32(num2, 16))).ToString();
             }
 
 
@@ -154,73 +151,6 @@ namespace Mips16bits
         }
 
 
-        public string mult(string num1, string num2)
-        {
-
-
-            int number;
-            if (int.TryParse(num2, System.Globalization.NumberStyles.HexNumber, null, out number))
-            {
-                return (Convert.ToInt64(num1, 16) * (int.Parse(num2))).ToString();
-
-            }
-            else if (int.TryParse(num2, System.Globalization.NumberStyles.HexNumber, null, out number) && int.TryParse(num1, System.Globalization.NumberStyles.HexNumber, null, out number))
-            {
-                return ((int.Parse(num1)) * (int.Parse(num2))).ToString();
-            }
-            else
-            {
-
-                return (Convert.ToInt64(num2, 16) * Convert.ToInt32(num1, 16)).ToString();
-            }
-
-
-        }
-        public string div(string num1, string num2)
-        {
-
-
-            int number;
-            if (int.TryParse(num2, System.Globalization.NumberStyles.HexNumber, null, out number))
-            {
-                return (Convert.ToInt64(num1, 16) / (int.Parse(num2))).ToString();
-
-            }
-            else if (int.TryParse(num2, System.Globalization.NumberStyles.HexNumber, null, out number) && int.TryParse(num1, System.Globalization.NumberStyles.HexNumber, null, out number))
-            {
-                return ((int.Parse(num1)) / (int.Parse(num2))).ToString();
-            }
-            else
-            {
-
-                return (Convert.ToInt64(num2, 16) / Convert.ToInt64(num1, 16)).ToString();
-            }
-
-
-        }
-
-        public string lui(string registerName, string num2)
-        {
-
-
-
-            int number;
-            if (int.TryParse(num2, System.Globalization.NumberStyles.HexNumber, null, out number))
-            {
-                num2 = "0x" + int.Parse(num2).ToString("x");
-                return num2;
-
-
-
-            }
-
-
-            return num2;
-
-        }
-
-
-
 
 
         public string xor(string num1, string num2)
@@ -244,23 +174,7 @@ namespace Mips16bits
 
         }
 
-        public string stl(string num1, string num2)
-        {
 
-            int number;
-            if (int.TryParse(num2, System.Globalization.NumberStyles.HexNumber, null, out number))
-            {
-                return (Convert.ToInt32(num1, 16) < (int.Parse(num2))) ? "1" : "0";
-
-            }
-
-            else
-            {
-
-                return (Convert.ToInt32(num1, 16) < Convert.ToInt32(num2, 16)) ? "1" : "0";
-            }
-
-        }
         public string srl(string num1, string num2)
         {
 
@@ -314,7 +228,7 @@ namespace Mips16bits
             if (int.TryParse(num2, System.Globalization.NumberStyles.HexNumber, null, out number))
             {
                 string addressint = (Convert.ToInt64(num1, 16) + Convert.ToInt64(num2, 2)).ToString();
-                string addresHex = "0x" + int.Parse(addressint).ToString("X");
+                string addresHex = "0x" + int.Parse(addressint).ToString("X").PadLeft(8, '0');
 
                 //this.result = this.dataDb.getData().Where(p => Convert.ToInt32(p.adress, 16) == Convert.ToInt32(addresHex, 16)).First();
 
@@ -324,7 +238,7 @@ namespace Mips16bits
             else
             {
                 string addressint = (Convert.ToInt64(num2, 2) + Convert.ToInt64(num1, 16)).ToString();
-                string addresHex = "0x" + int.Parse(addressint).ToString("X");
+                string addresHex = "0x" + int.Parse(addressint).ToString("X").PadLeft(8,'0');
 
                 // this.result = this.dataDb.getData().Where(p => Convert.ToInt32(p.adress, 16) == Convert.ToInt32(addresHex, 16)).First();
                 //string value = result.value0;
@@ -342,7 +256,7 @@ namespace Mips16bits
             if (int.TryParse(num2, System.Globalization.NumberStyles.HexNumber, null, out number))
             {
                 string addressint = (Convert.ToInt32(num1, 16) + Convert.ToInt32(num2, 2)).ToString();
-                string addresHex = "0x" + int.Parse(addressint).ToString("X");
+                string addresHex = "0x" + int.Parse(addressint).ToString("X").PadLeft(8, '0');
 
                 // this.result = this.dataDb.getData().Where(p => Convert.ToInt32(p.adress, 16) == Convert.ToInt32(addresHex, 16)).First();
 
@@ -352,7 +266,7 @@ namespace Mips16bits
             else
             {
                 string addressint = (Convert.ToInt32(num2, 16) + Convert.ToInt64(num1, 16)).ToString();
-                string addresHex = "0x" + int.Parse(addressint).ToString("X");
+                string addresHex = "0x" + int.Parse(addressint).ToString("X").PadLeft(8, '0');
                 // this.result = this.dataDb.getData().Where(p => Convert.ToInt32(p.adress, 16) == Convert.ToInt32(addresHex, 16)).First();
 
                 return (addresHex);

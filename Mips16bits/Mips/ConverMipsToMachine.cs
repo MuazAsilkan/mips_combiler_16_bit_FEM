@@ -14,12 +14,6 @@ namespace Mips16bits.Mips
         ValueTable valueTable= new ValueTable();
         RegisterDb registerDb = new RegisterDb();
 
-
-
-        public ConverMipsToMachine() { }
-
-    
-
         public MachineCode converToMac(Instruction ins)
         {
 
@@ -36,18 +30,33 @@ namespace Mips16bits.Mips
 
             if (machineCode.machineCode.Substring(3, 2) == "00")
             {
-                foreach (string r in variableList)
+                if (functionName == "sll" | functionName == "srl")
                 {
-                    if (r == "$ra") {
+                    machineCode.machineCode = machineCode.machineCode + (registerDb.getRegisterValue(variableList[0]));
+                    machineCode.machineCode = machineCode.machineCode + (registerDb.getRegisterValue(variableList[1]));
+                    machineCode.machineCode = machineCode.machineCode + Convert.ToString(int.Parse(variableList[2]), 2).PadLeft(3, '0');
+                }
+                else
+                {
+                    foreach (string r in variableList)
+                    {
 
 
-                        machineCode.machineCode = machineCode.machineCode + "000000";
+
+                        if (r == "$ra")
+                        {
+
+
+                            machineCode.machineCode = machineCode.machineCode + "000000";
+
+                        }
+
+                        machineCode.machineCode = machineCode.machineCode + (registerDb.getRegisterValue(r));
+
 
                     }
-                    machineCode.machineCode = machineCode.machineCode + (registerDb.getRegisterValue(r));
-
-
                 }
+              
                 machineCode.machineCode = machineCode.machineCode + "00";
             }
             else if (machineCode.machineCode.Substring(3, 2) == "10")
@@ -74,7 +83,16 @@ namespace Mips16bits.Mips
                 machineCode.machineCode = machineCode.machineCode + (registerDb.getRegisterValue(variableList[1]));
                 try
                 {
-                    machineCode.machineCode = machineCode.machineCode + Convert.ToString(int.Parse(variableList[2]), 2).PadLeft(5, '0'); 
+                        try
+                        {
+                            machineCode.machineCode = machineCode.machineCode + Convert.ToString(int.Parse(variableList[2]), 2).PadLeft(5, '0');
+                        }
+                        catch (Exception)
+                        {
+
+                            machineCode.machineCode = machineCode.machineCode + Convert.ToString(Convert.ToInt32(variableList[2], 16), 2).PadLeft(5, '0');
+                        }
+                   
 
 
                 }

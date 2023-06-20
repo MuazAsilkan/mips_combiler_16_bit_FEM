@@ -44,6 +44,11 @@ namespace Mips16bits
             this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
+            this.listView3 = new System.Windows.Forms.ListView();
+            this.counter = new System.Windows.Forms.ColumnHeader();
+            this.machcode = new System.Windows.Forms.ColumnHeader();
+            this.MachCodeHex = new System.Windows.Forms.ColumnHeader();
+            this.code2 = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -159,13 +164,13 @@ namespace Mips16bits
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Palace Script MT", 31.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label1.Font = new System.Drawing.Font("Rockwell", 31.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.LightSalmon;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(12, -1);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(290, 49);
+            this.label1.Size = new System.Drawing.Size(440, 65);
             this.label1.TabIndex = 8;
-            this.label1.Text = "F EM     Compiler";
+            this.label1.Text = "FEM    Compiler";
             // 
             // button4
             // 
@@ -178,12 +183,52 @@ namespace Mips16bits
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // listView3
+            // 
+            this.listView3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(33)))));
+            this.listView3.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.counter,
+            this.machcode,
+            this.MachCodeHex,
+            this.code2});
+            this.listView3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.listView3.ForeColor = System.Drawing.Color.Lime;
+            this.listView3.HideSelection = false;
+            this.listView3.Location = new System.Drawing.Point(12, 69);
+            this.listView3.Name = "listView3";
+            this.listView3.Size = new System.Drawing.Size(803, 435);
+            this.listView3.TabIndex = 10;
+            this.listView3.UseCompatibleStateImageBehavior = false;
+            this.listView3.View = System.Windows.Forms.View.Details;
+            this.listView3.Visible = false;
+            // 
+            // counter
+            // 
+            this.counter.Text = "Counter";
+            this.counter.Width = 120;
+            // 
+            // machcode
+            // 
+            this.machcode.Text = "MachineCode";
+            this.machcode.Width = 200;
+            // 
+            // MachCodeHex
+            // 
+            this.MachCodeHex.Text = "MachCode Hex";
+            this.MachCodeHex.Width = 200;
+            // 
+            // code2
+            // 
+            this.code2.Text = "Code";
+            this.code2.Width = 200;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(43)))));
             this.ClientSize = new System.Drawing.Size(1170, 726);
+            this.Controls.Add(this.listView3);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button3);
@@ -216,6 +261,11 @@ namespace Mips16bits
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ListView listView3;
+        private System.Windows.Forms.ColumnHeader counter;
+        private System.Windows.Forms.ColumnHeader machcode;
+        private System.Windows.Forms.ColumnHeader MachCodeHex;
+        private System.Windows.Forms.ColumnHeader code2;
     }
 }
 

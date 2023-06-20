@@ -17,5 +17,6 @@ namespace Mips16bits.Entity
         public int insMemory { get; set; }
         public int runned { get; set; }
 
+        public string machCode { get; set; }
     }
 }

@@ -26,6 +26,7 @@ namespace Mips16bits.Compiler
         public void compiler(Instruction instructions)
         {
             data = converToMac.converToMac(instructions);
+            instructions.machCode = data.machineCode;
             string[] arraay = data.mipsCode.Split(" ");
             parserData.Add("type", valueTable.getType(arraay[0]));
             parserData.Add("oppCode", data.machineCode.Substring(0, 5));
@@ -33,9 +34,9 @@ namespace Mips16bits.Compiler
             switch (parserData["type"])
             {
                 case "R":
-                    parserData.Add("rd", data.machineCode.Substring(5, 3));
-                    parserData.Add("rt", data.machineCode.Substring(8, 3));
-                    parserData.Add("rs", data.machineCode.Substring(11, 3));
+                    parserData.Add("rd", data.machineCode.Substring(5, 3)); // eklenecek
+                    parserData.Add("rt", data.machineCode.Substring(8, 3));// shiftlencek
+                    parserData.Add("rs", data.machineCode.Substring(11, 3)); // shift
 
                     
                     switch (funcName)
@@ -56,7 +57,7 @@ namespace Mips16bits.Compiler
                             rt = registerDb.getRegisterWithRegisterValue(parserData["rt"]);
                             rd = registerDb.getRegisterWithRegisterValue(parserData["rd"]);
                            validator.checkValue(rs.value, rt.value, rd.value);
-                            rd.value = operation.delete(rs.value, rt.value);
+                            rd.value = operation.delete(rt.value, rs.value);
                             rd.value = int.Parse(rd.value).ToString("x8");
                             registerDb.assignValue(rd, rd.value);
                             Form1.pcCounter = Form1.pcCounter + 2;
@@ -96,11 +97,11 @@ namespace Mips16bits.Compiler
                             break;
 
                         case "sll":
-                            rs = registerDb.getRegisterWithRegisterValue(parserData["rs"]);
+                          // rs = registerDb.getRegisterWithRegisterValue(parserData["rs"]);
                             rt = registerDb.getRegisterWithRegisterValue(parserData["rt"]);
                             rd = registerDb.getRegisterWithRegisterValue(parserData["rd"]);
                             validator.checkValue(rs.value, rt.value, rd.value);
-                            rd.value = operation.sll(rs.value, rt.value);
+                            rd.value = operation.sll(rt.value, Convert.ToInt32(parserData["rs"], 2).ToString());
                             rd.value = int.Parse(rd.value).ToString("x8");
 
                             registerDb.assignValue(rd, rd.value);
@@ -108,11 +109,11 @@ namespace Mips16bits.Compiler
                             break;
 
                         case "srl":
-                            rs = registerDb.getRegisterWithRegisterValue(parserData["rs"]);
+                           // rs = registerDb.getRegisterWithRegisterValue(parserData["rs"]);
                             rt = registerDb.getRegisterWithRegisterValue(parserData["rt"]);
                             rd = registerDb.getRegisterWithRegisterValue(parserData["rd"]);
                             validator.checkValue(rs.value, rt.value, rd.value);
-                            rd.value = operation.srl(rs.value, rt.value);
+                            rd.value = operation.srl(rt.value, Convert.ToInt32(parserData["rs"], 2).ToString());
                             rd.value = int.Parse(rd.value).ToString("x8");
                             registerDb.assignValue(rd, rd.value);
                             Form1.pcCounter = Form1.pcCounter + 2;

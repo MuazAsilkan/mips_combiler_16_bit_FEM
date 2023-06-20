@@ -34,7 +34,23 @@ namespace Mips16bits
 
             InitializeComponent();
         }
+        private void showAllInstructions()
+        {
+            this.listView3.Items.Clear();
+            foreach (Instruction ins in ınstructions)
+            {
+                
+                this.item = new ListViewItem("0x000000"+ins.insMemory.ToString());
+                this.item.SubItems.Add(ins.machCode);
+                this.item.SubItems.Add("0x"+Convert.ToInt32(ins.machCode, 2).ToString("X"));
+                this.item.SubItems.Add(ins.data);
 
+                //this.item.SubItems.Add(s.value);
+
+                listView3.Items.Add(item);
+
+            }
+        }
 
         private void showAllRegister()
         {
@@ -148,6 +164,7 @@ namespace Mips16bits
          
             
             registerdb.assignValue(registerdb.getRegister("$pc"), (pcCounter-2).ToString("x8"));
+            showAllInstructions();
             ınstructions.Clear();
             pcCounter = 0x00000000;
         }
@@ -209,6 +226,9 @@ namespace Mips16bits
             this.listView2.Items.Clear();
             showAllRegister();
             showAllData();
+            
+            //showAllInstructions();
+            this.listView3.Visible=true;
          
         }
 
@@ -233,6 +253,7 @@ namespace Mips16bits
             richTextBox1.Clear();
             this.listView1.Items.Clear();
             this.listView2.Items.Clear();
+            this.listView3.Items.Clear();
             DataDb dataDb = new DataDb();
             RegisterDb registerdb = new RegisterDb();
             showAllRegister();
@@ -240,6 +261,7 @@ namespace Mips16bits
             ınstructions.Clear();
             i = 0;
             pcCounter = 0x00000000;
+            this.listView3.Visible = false;
         }
     }
 }
