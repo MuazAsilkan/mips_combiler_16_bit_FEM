@@ -172,14 +172,24 @@ namespace Mips16bits
                     int startingPos= richTextBox1.Find(ınstructions[i].data);
                     richTextBox1.Select(startingPos, ınstructions[i].data.Length);
                     richTextBox1.SelectionColor = Color.Red;
-                    i++;
+                    
                     /*
                     this.richTextBox1.Select(i,1);
                     this.richTextBox1.SelectionBackColor = Color.Aqua;*/
                     //this.richTextBox1.Select(0, 0);
+                    string func = ınstructions[i].data.Split(' ')[0];
+                    if (func!="jal")
+                    {
+                        registerdb.assignValue(registerdb.getRegister("$pc"), (pcCounter - 2).ToString("x8"));
+                    }
+                    else
+                    {
+                        registerdb.assignValue(registerdb.getRegister("$pc"), (pcCounter).ToString("x8"));
+                    }
+                    ınstructions.Clear();
+                    
                 }
-                registerdb.assignValue(registerdb.getRegister("$pc"), (pcCounter - 2).ToString("x8"));
-                ınstructions.Clear();
+                i++;
             }
             catch { }
         }
