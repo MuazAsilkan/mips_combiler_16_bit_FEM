@@ -131,6 +131,7 @@ namespace Mips16bits
                     {
                         if (ınstructions[i].data == "exit")
                         {
+                            MessageBox.Show("program terminated!", "Final", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
                         }
                         if (ınstructions[i].runned == 0)
@@ -158,36 +159,37 @@ namespace Mips16bits
             {
                 if (pcCounter == ınstructions[i].insMemory)
                 {
-                    if (ınstructions[i].data == "exit")
-                    {
-                        
-                    }
-                    if (ınstructions[i].runned == 0)
-                    {
-                        compiler.compiler(ınstructions[i]);
-                        ınstructions[i].runned = 1;
-                    }
-                    
-                    //Dim searchWord As String = "James"
-                    int startingPos= richTextBox1.Find(ınstructions[i].data);
+                    int startingPos = richTextBox1.Find(ınstructions[i].data);
                     richTextBox1.Select(startingPos, ınstructions[i].data.Length);
                     richTextBox1.SelectionColor = Color.Red;
                     
-                    /*
-                    this.richTextBox1.Select(i,1);
-                    this.richTextBox1.SelectionBackColor = Color.Aqua;*/
-                    //this.richTextBox1.Select(0, 0);
-                    string func = ınstructions[i].data.Split(' ')[0];
-                    if (func=="jal"|| func == "j")
+                    if (ınstructions[i].data == "exit")
                     {
-                        registerdb.assignValue(registerdb.getRegister("$pc"), (pcCounter).ToString("x8"));
+                        
+                        MessageBox.Show("program terminated!", "Final", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        registerdb.assignValue(registerdb.getRegister("$pc"), (pcCounter - 2).ToString("x8"));
+                        if (ınstructions[i].runned == 0)
+                        {
+                            
+                            compiler.compiler(ınstructions[i]);
+                            ınstructions[i].runned = 1;
+                        }
+
+                        string func = ınstructions[i].data.Split(' ')[0];
+                        if (func == "jal" || func == "j" || func == "beq" || func == "bne")
+                        {
+                            registerdb.assignValue(registerdb.getRegister("$pc"), (pcCounter).ToString("x8"));
+                        }
+                        else
+                        {
+                            registerdb.assignValue(registerdb.getRegister("$pc"), (pcCounter - 2).ToString("x8"));
+                        }
+
+                        ınstructions.Clear();
                     }
                     
-                    ınstructions.Clear();
                     
                 }
                 i++;
