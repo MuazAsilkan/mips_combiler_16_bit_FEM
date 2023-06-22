@@ -97,7 +97,7 @@ namespace Mips16bits.Compiler
                             break;
 
                         case "sll":
-                          // rs = registerDb.getRegisterWithRegisterValue(parserData["rs"]);
+                            rs = registerDb.getRegisterWithRegisterValue(parserData["rs"]);
                             rt = registerDb.getRegisterWithRegisterValue(parserData["rt"]);
                             rd = registerDb.getRegisterWithRegisterValue(parserData["rd"]);
                             validator.checkValue(rs.value, rt.value, rd.value);
@@ -109,7 +109,7 @@ namespace Mips16bits.Compiler
                             break;
 
                         case "srl":
-                           // rs = registerDb.getRegisterWithRegisterValue(parserData["rs"]);
+                            rs = registerDb.getRegisterWithRegisterValue(parserData["rs"]);
                             rt = registerDb.getRegisterWithRegisterValue(parserData["rt"]);
                             rd = registerDb.getRegisterWithRegisterValue(parserData["rd"]);
                             validator.checkValue(rs.value, rt.value, rd.value);
